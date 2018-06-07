@@ -1,0 +1,1325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="localdb4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Constants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="alcoWait" Type="real" Nullable="false" />
+          <Property Name="alcoDoubleDiagnosis" Type="tinyint" />
+          <Property Name="timeoutParamedicEdit" Type="int" />
+          <Property Name="notificationDelay" Type="int" />
+          <Property Name="alcoWarning" Type="float" Nullable="false" />
+          <Property Name="alcoCritical" Type="float" Nullable="false" />
+          <Property Name="metal" Type="tinyint" Nullable="false" />
+          <Property Name="guiConfig" Type="tinyint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnosis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="personID" Type="bigint" Nullable="false" />
+          <Property Name="terminalID" Type="bigint" Nullable="false" />
+          <Property Name="paramedicID" Type="bigint" />
+          <Property Name="alcoResult" Type="float" />
+          <Property Name="diagnosisDateTime" Type="datetime" Nullable="false" />
+          <Property Name="startPhotoPath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="videoPath" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="paramedicVisit" Type="tinyint" />
+          <Property Name="paramedicResult" Type="float" />
+          <Property Name="diagnosisParamedic" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" />
+          <Property Name="direction" Type="tinyint" Nullable="false" />
+          <Property Name="verification" Type="tinyint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'localdb4.dbo.ErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="terminalID" />
+            <PropertyRef Name="errorDate" />
+            <PropertyRef Name="currentDate" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="terminalID" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="errorDate" Type="datetime" Nullable="false" />
+          <Property Name="currentDate" Type="datetime" Nullable="false" />
+          <Property Name="rfidReaderStatus" Type="tinyint" />
+          <Property Name="alcoInStatus" Type="tinyint" />
+          <Property Name="alcoOutStatus" Type="tinyint" />
+          <Property Name="webcamInStatus" Type="tinyint" />
+          <Property Name="webcamOutStatus" Type="tinyint" />
+          <Property Name="turnstileStatus" Type="tinyint" />
+          <Property Name="global_status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FaceDescriptor">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="bigint" Nullable="false" />
+          <Property Name="descriptor" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Firm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="code" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Kpp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="zone" Type="tinyint" Nullable="false" />
+          <Property Name="ip" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MailService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diagnosisId" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="terminalID" Type="bigint" Nullable="false" />
+          <Property Name="inStart" Type="time" Precision="7" />
+          <Property Name="inStop" Type="time" Precision="7" />
+          <Property Name="outStart" Type="time" Precision="7" />
+          <Property Name="outStop" Type="time" Precision="7" />
+          <Property Name="blockStart" Type="time" Precision="7" />
+          <Property Name="blockStop" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Struct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="lvl" Type="tinyint" Nullable="false" />
+          <Property Name="parent" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="structID" Type="bigint" />
+          <Property Name="userRoleID" Type="bigint" />
+          <Property Name="kppID" Type="bigint" />
+          <Property Name="firmID" Type="bigint" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reportSub" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Terminal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kppID" Type="bigint" Nullable="false" />
+          <Property Name="number" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminalCondition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="terminalID" Type="bigint" Nullable="false" />
+          <Property Name="timeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="temperature" Type="real" Nullable="false" />
+          <Property Name="rfidReaderStatus" Type="tinyint" />
+          <Property Name="alcoInStatus" Type="tinyint" />
+          <Property Name="alcoOutStatus" Type="tinyint" />
+          <Property Name="metalStatus" Type="tinyint" />
+          <Property Name="webcamInStatus" Type="tinyint" />
+          <Property Name="webcamOutStatus" Type="tinyint" />
+          <Property Name="turnstileStatus" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="bigint" />
+          <Property Name="role" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+          <Property Name="active" Type="tinyint" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="patrinymicName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="identificationCardCode" Type="varchar" MaxLength="255" />
+          <Property Name="personNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="patronymicName" Type="nvarchar" MaxLength="255" />
+          <Property Name="photoPath" Type="nvarchar" MaxLength="255" />
+          <Property Name="jobPosition" Type="nvarchar" MaxLength="255" />
+          <Property Name="department" Type="nvarchar" MaxLength="255" />
+          <Property Name="passID" Type="nvarchar" MaxLength="255" />
+          <Property Name="archived" Type="tinyint" />
+          <Property Name="placeControl" Type="tinyint" />
+          <Property Name="structCode" Type="bigint" />
+          <Property Name="firm" Type="bigint" />
+        </EntityType>
+        <EntityType Name="VerificationQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diagnosisId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="VerificationResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="diagnosisId" Type="uniqueidentifier" />
+          <Property Name="personId" Type="bigint" />
+          <Property Name="expectedId" Type="bigint" />
+          <Property Name="probability" Type="real" />
+          <Property Name="criteria" Type="real" />
+        </EntityType>
+        <EntityType Name="WorkCheck">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="dateTimeIn" Type="datetime" />
+          <Property Name="dateTimeOut" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_FaceDescriptor_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="FaceDescriptor" Type="Self.FaceDescriptor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FaceDescriptor">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationQueue_Diagnosis">
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="0..1" />
+          <End Role="VerificationQueue" Type="Self.VerificationQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnosis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationQueue">
+              <PropertyRef Name="diagnosisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Diagnosis">
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnosis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="diagnosisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="expectedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK3neppn7ik9jmpo1qc5bmny49a">
+          <End Role="Firm" Type="Self.Firm" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firm">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="firm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK4bb3lbogcjyv2rgcymgowbk9i">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Struct1" Type="Self.Struct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Struct1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK6almi6qttb9q9auqr2jhv3qdf">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="paramedicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK6na3xe6ww7u254tyu6utyy4s9">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK9nnnakic6qnv00pptas22wfkf">
+          <End Role="Kpp" Type="Self.Kpp" Multiplicity="1" />
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kpp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Terminal">
+              <PropertyRef Name="kppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbaesp1t78vo6h8sugk2xmgp2x">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKc6m5ha4t5ixqpnie3est35bar">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="personID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKj4ymbukhld55yx54bs313i1ui">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKje65tdo6ksjba53btju9ausen">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="structCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKkg6ca1ilhywv1kolxhbhxnmky">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="TerminalCondition" Type="Self.TerminalCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TerminalCondition">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKod6uv2bf5bla0oppl6ev0c9gr">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="structID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKpm4yny0j1g5deotits3etxi7w">
+          <End Role="Kpp" Type="Self.Kpp" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kpp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="kppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Struct_fk0">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Struct1" Type="Self.Struct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Struct1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="localdb4ModelStoreContainer">
+          <EntitySet Name="Constants" EntityType="Self.Constants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnosis" EntityType="Self.Diagnosis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FaceDescriptor" EntityType="Self.FaceDescriptor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Firm" EntityType="Self.Firm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kpp" EntityType="Self.Kpp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailService" EntityType="Self.MailService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Struct" EntityType="Self.Struct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terminal" EntityType="Self.Terminal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminalCondition" EntityType="Self.TerminalCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VerificationQueue" EntityType="Self.VerificationQueue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VerificationResult" EntityType="Self.VerificationResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkCheck" EntityType="Self.WorkCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ErrorLog].[id] AS [id], 
+    [ErrorLog].[terminalID] AS [terminalID], 
+    [ErrorLog].[name] AS [name], 
+    [ErrorLog].[errorDate] AS [errorDate], 
+    [ErrorLog].[currentDate] AS [currentDate], 
+    [ErrorLog].[rfidReaderStatus] AS [rfidReaderStatus], 
+    [ErrorLog].[alcoInStatus] AS [alcoInStatus], 
+    [ErrorLog].[alcoOutStatus] AS [alcoOutStatus], 
+    [ErrorLog].[webcamInStatus] AS [webcamInStatus], 
+    [ErrorLog].[webcamOutStatus] AS [webcamOutStatus], 
+    [ErrorLog].[turnstileStatus] AS [turnstileStatus], 
+    [ErrorLog].[global_status] AS [global_status]
+    FROM [dbo].[ErrorLog] AS [ErrorLog]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_FaceDescriptor_Users" Association="Self.FK_FaceDescriptor_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FaceDescriptor" EntitySet="FaceDescriptor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationQueue_Diagnosis" Association="Self.FK_VerificationQueue_Diagnosis">
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+            <End Role="VerificationQueue" EntitySet="VerificationQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Diagnosis" Association="Self.FK_VerificationResult_Diagnosis">
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Users" Association="Self.FK_VerificationResult_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Users1" Association="Self.FK_VerificationResult_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK3neppn7ik9jmpo1qc5bmny49a" Association="Self.FK3neppn7ik9jmpo1qc5bmny49a">
+            <End Role="Firm" EntitySet="Firm" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK4bb3lbogcjyv2rgcymgowbk9i" Association="Self.FK4bb3lbogcjyv2rgcymgowbk9i">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Struct1" EntitySet="Struct" />
+          </AssociationSet>
+          <AssociationSet Name="FK6almi6qttb9q9auqr2jhv3qdf" Association="Self.FK6almi6qttb9q9auqr2jhv3qdf">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK6na3xe6ww7u254tyu6utyy4s9" Association="Self.FK6na3xe6ww7u254tyu6utyy4s9">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK9nnnakic6qnv00pptas22wfkf" Association="Self.FK9nnnakic6qnv00pptas22wfkf">
+            <End Role="Kpp" EntitySet="Kpp" />
+            <End Role="Terminal" EntitySet="Terminal" />
+          </AssociationSet>
+          <AssociationSet Name="FKbaesp1t78vo6h8sugk2xmgp2x" Association="Self.FKbaesp1t78vo6h8sugk2xmgp2x">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FKc6m5ha4t5ixqpnie3est35bar" Association="Self.FKc6m5ha4t5ixqpnie3est35bar">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FKj4ymbukhld55yx54bs313i1ui" Association="Self.FKj4ymbukhld55yx54bs313i1ui">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FKje65tdo6ksjba53btju9ausen" Association="Self.FKje65tdo6ksjba53btju9ausen">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FKkg6ca1ilhywv1kolxhbhxnmky" Association="Self.FKkg6ca1ilhywv1kolxhbhxnmky">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="TerminalCondition" EntitySet="TerminalCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FKod6uv2bf5bla0oppl6ev0c9gr" Association="Self.FKod6uv2bf5bla0oppl6ev0c9gr">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FKpm4yny0j1g5deotits3etxi7w" Association="Self.FKpm4yny0j1g5deotits3etxi7w">
+            <End Role="Kpp" EntitySet="Kpp" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="Struct_fk0" Association="Self.Struct_fk0">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Struct1" EntitySet="Struct" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="localdb4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Constants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="alcoWait" Type="Single" Nullable="false" />
+          <Property Name="alcoDoubleDiagnosis" Type="Byte" />
+          <Property Name="timeoutParamedicEdit" Type="Int32" />
+          <Property Name="notificationDelay" Type="Int32" />
+          <Property Name="alcoWarning" Type="Double" Nullable="false" />
+          <Property Name="alcoCritical" Type="Double" Nullable="false" />
+          <Property Name="metal" Type="Byte" Nullable="false" />
+          <Property Name="guiConfig" Type="Byte" Nullable="false" />
+          <Property Name="id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnosis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="personID" Type="Int64" Nullable="false" />
+          <Property Name="terminalID" Type="Int64" Nullable="false" />
+          <Property Name="paramedicID" Type="Int64" />
+          <Property Name="alcoResult" Type="Double" />
+          <Property Name="diagnosisDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startPhotoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="videoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="paramedicVisit" Type="Byte" />
+          <Property Name="paramedicResult" Type="Double" />
+          <Property Name="diagnosisParamedic" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="direction" Type="Byte" Nullable="false" />
+          <Property Name="verification" Type="Byte" />
+          <NavigationProperty Name="VerificationQueue" Relationship="Self.FK_VerificationQueue_Diagnosis" FromRole="Diagnosis" ToRole="VerificationQueue" />
+          <NavigationProperty Name="VerificationResult" Relationship="Self.FK_VerificationResult_Diagnosis" FromRole="Diagnosis" ToRole="VerificationResult" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK6almi6qttb9q9auqr2jhv3qdf" FromRole="Diagnosis" ToRole="UserRoles" />
+          <NavigationProperty Name="Users" Relationship="Self.FKc6m5ha4t5ixqpnie3est35bar" FromRole="Diagnosis" ToRole="Users" />
+          <NavigationProperty Name="Terminal" Relationship="Self.FKj4ymbukhld55yx54bs313i1ui" FromRole="Diagnosis" ToRole="Terminal" />
+        </EntityType>
+        <EntityType Name="FaceDescriptor">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int64" Nullable="false" />
+          <Property Name="descriptor" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_FaceDescriptor_Users" FromRole="FaceDescriptor" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Firm">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="Int64" />
+          <NavigationProperty Name="Users" Relationship="Self.FK3neppn7ik9jmpo1qc5bmny49a" FromRole="Firm" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Kpp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="zone" Type="Byte" Nullable="false" />
+          <Property Name="ip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Terminal" Relationship="Self.FK9nnnakic6qnv00pptas22wfkf" FromRole="Kpp" ToRole="Terminal" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FKpm4yny0j1g5deotits3etxi7w" FromRole="Kpp" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="MailService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diagnosisId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="terminalID" Type="Int64" Nullable="false" />
+          <Property Name="inStart" Type="Time" Precision="7" />
+          <Property Name="inStop" Type="Time" Precision="7" />
+          <Property Name="outStart" Type="Time" Precision="7" />
+          <Property Name="outStop" Type="Time" Precision="7" />
+          <Property Name="blockStart" Type="Time" Precision="7" />
+          <Property Name="blockStop" Type="Time" Precision="7" />
+          <NavigationProperty Name="Terminal" Relationship="Self.FKbaesp1t78vo6h8sugk2xmgp2x" FromRole="Schedule" ToRole="Terminal" />
+        </EntityType>
+        <EntityType Name="Struct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lvl" Type="Byte" Nullable="false" />
+          <Property Name="parent" Type="Int64" />
+          <NavigationProperty Name="Struct1" Relationship="Self.FK4bb3lbogcjyv2rgcymgowbk9i" FromRole="Struct" ToRole="Struct1" />
+          <NavigationProperty Name="Struct2" Relationship="Self.FK4bb3lbogcjyv2rgcymgowbk9i" FromRole="Struct1" ToRole="Struct" />
+          <NavigationProperty Name="Users" Relationship="Self.FKje65tdo6ksjba53btju9ausen" FromRole="Struct" ToRole="Users" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FKod6uv2bf5bla0oppl6ev0c9gr" FromRole="Struct" ToRole="Subscriptions" />
+          <NavigationProperty Name="Struct11" Relationship="Self.Struct_fk0" FromRole="Struct" ToRole="Struct1" />
+          <NavigationProperty Name="Struct3" Relationship="Self.Struct_fk0" FromRole="Struct1" ToRole="Struct" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="structID" Type="Int64" />
+          <Property Name="userRoleID" Type="Int64" />
+          <Property Name="kppID" Type="Int64" />
+          <Property Name="firmID" Type="Int64" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reportSub" Type="Int64" />
+          <NavigationProperty Name="Kpp" Relationship="Self.FKpm4yny0j1g5deotits3etxi7w" FromRole="Subscriptions" ToRole="Kpp" />
+          <NavigationProperty Name="Struct" Relationship="Self.FKod6uv2bf5bla0oppl6ev0c9gr" FromRole="Subscriptions" ToRole="Struct" />
+        </EntityType>
+        <EntityType Name="Terminal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kppID" Type="Int64" Nullable="false" />
+          <Property Name="number" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Diagnosis" Relationship="Self.FKj4ymbukhld55yx54bs313i1ui" FromRole="Terminal" ToRole="Diagnosis" />
+          <NavigationProperty Name="Kpp" Relationship="Self.FK9nnnakic6qnv00pptas22wfkf" FromRole="Terminal" ToRole="Kpp" />
+          <NavigationProperty Name="Schedule" Relationship="Self.FKbaesp1t78vo6h8sugk2xmgp2x" FromRole="Terminal" ToRole="Schedule" />
+          <NavigationProperty Name="TerminalCondition" Relationship="Self.FKkg6ca1ilhywv1kolxhbhxnmky" FromRole="Terminal" ToRole="TerminalCondition" />
+        </EntityType>
+        <EntityType Name="TerminalCondition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="terminalID" Type="Int64" Nullable="false" />
+          <Property Name="timeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="temperature" Type="Single" Nullable="false" />
+          <Property Name="rfidReaderStatus" Type="Byte" />
+          <Property Name="alcoInStatus" Type="Byte" />
+          <Property Name="alcoOutStatus" Type="Byte" />
+          <Property Name="metalStatus" Type="Byte" />
+          <Property Name="webcamInStatus" Type="Byte" />
+          <Property Name="webcamOutStatus" Type="Byte" />
+          <Property Name="turnstileStatus" Type="Byte" />
+          <NavigationProperty Name="Terminal" Relationship="Self.FKkg6ca1ilhywv1kolxhbhxnmky" FromRole="TerminalCondition" ToRole="Terminal" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int64" />
+          <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Byte" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patrinymicName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Diagnosis" Relationship="Self.FK6almi6qttb9q9auqr2jhv3qdf" FromRole="UserRoles" ToRole="Diagnosis" />
+          <NavigationProperty Name="Users" Relationship="Self.FK6na3xe6ww7u254tyu6utyy4s9" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="identificationCardCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="personNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="patronymicName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="photoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="jobPosition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="passID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="archived" Type="Byte" />
+          <Property Name="placeControl" Type="Byte" />
+          <Property Name="structCode" Type="Int64" />
+          <Property Name="firm" Type="Int64" />
+          <NavigationProperty Name="Diagnosis" Relationship="Self.FKc6m5ha4t5ixqpnie3est35bar" FromRole="Users" ToRole="Diagnosis" />
+          <NavigationProperty Name="FaceDescriptor" Relationship="Self.FK_FaceDescriptor_Users" FromRole="Users" ToRole="FaceDescriptor" />
+          <NavigationProperty Name="Firm1" Relationship="Self.FK3neppn7ik9jmpo1qc5bmny49a" FromRole="Users" ToRole="Firm" />
+          <NavigationProperty Name="Struct" Relationship="Self.FKje65tdo6ksjba53btju9ausen" FromRole="Users" ToRole="Struct" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK6na3xe6ww7u254tyu6utyy4s9" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="VerificationResult" Relationship="Self.FK_VerificationResult_Users" FromRole="Users" ToRole="VerificationResult" />
+          <NavigationProperty Name="VerificationResult1" Relationship="Self.FK_VerificationResult_Users1" FromRole="Users" ToRole="VerificationResult" />
+        </EntityType>
+        <EntityType Name="VerificationQueue">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diagnosisId" Type="Guid" />
+          <NavigationProperty Name="Diagnosis" Relationship="Self.FK_VerificationQueue_Diagnosis" FromRole="VerificationQueue" ToRole="Diagnosis" />
+        </EntityType>
+        <EntityType Name="VerificationResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="diagnosisId" Type="Guid" />
+          <Property Name="personId" Type="Int64" />
+          <Property Name="expectedId" Type="Int64" />
+          <NavigationProperty Name="Diagnosis" Relationship="Self.FK_VerificationResult_Diagnosis" FromRole="VerificationResult" ToRole="Diagnosis" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_VerificationResult_Users" FromRole="VerificationResult" ToRole="Users" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_VerificationResult_Users1" FromRole="VerificationResult" ToRole="Users" />
+          <Property Name="probability" Type="Single" />
+          <Property Name="criteria" Type="Single" />
+        </EntityType>
+        <EntityType Name="WorkCheck">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="dateTimeIn" Type="DateTime" Precision="3" />
+          <Property Name="dateTimeOut" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="terminalID" />
+            <PropertyRef Name="errorDate" />
+            <PropertyRef Name="currentDate" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="terminalID" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="errorDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="currentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rfidReaderStatus" Type="Byte" />
+          <Property Name="alcoInStatus" Type="Byte" />
+          <Property Name="alcoOutStatus" Type="Byte" />
+          <Property Name="webcamInStatus" Type="Byte" />
+          <Property Name="webcamOutStatus" Type="Byte" />
+          <Property Name="turnstileStatus" Type="Byte" />
+          <Property Name="global_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_VerificationQueue_Diagnosis">
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="0..1" />
+          <End Role="VerificationQueue" Type="Self.VerificationQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnosis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationQueue">
+              <PropertyRef Name="diagnosisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Diagnosis">
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnosis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="diagnosisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK6almi6qttb9q9auqr2jhv3qdf">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="paramedicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKc6m5ha4t5ixqpnie3est35bar">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="personID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKj4ymbukhld55yx54bs313i1ui">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Diagnosis">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FaceDescriptor_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="FaceDescriptor" Type="Self.FaceDescriptor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FaceDescriptor">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK3neppn7ik9jmpo1qc5bmny49a">
+          <End Role="Firm" Type="Self.Firm" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firm">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="firm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK9nnnakic6qnv00pptas22wfkf">
+          <End Role="Kpp" Type="Self.Kpp" Multiplicity="1" />
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kpp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Terminal">
+              <PropertyRef Name="kppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKpm4yny0j1g5deotits3etxi7w">
+          <End Role="Kpp" Type="Self.Kpp" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kpp">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="kppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKbaesp1t78vo6h8sugk2xmgp2x">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK4bb3lbogcjyv2rgcymgowbk9i">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Struct1" Type="Self.Struct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Struct1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKje65tdo6ksjba53btju9ausen">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="structCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKod6uv2bf5bla0oppl6ev0c9gr">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="structID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Struct_fk0">
+          <End Role="Struct" Type="Self.Struct" Multiplicity="0..1" />
+          <End Role="Struct1" Type="Self.Struct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Struct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Struct1">
+              <PropertyRef Name="parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKkg6ca1ilhywv1kolxhbhxnmky">
+          <End Role="Terminal" Type="Self.Terminal" Multiplicity="1" />
+          <End Role="TerminalCondition" Type="Self.TerminalCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TerminalCondition">
+              <PropertyRef Name="terminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK6na3xe6ww7u254tyu6utyy4s9">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VerificationResult_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="VerificationResult" Type="Self.VerificationResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="VerificationResult">
+              <PropertyRef Name="expectedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="localdb4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Constants" EntityType="Self.Constants" />
+          <EntitySet Name="Diagnosis" EntityType="Self.Diagnosis" />
+          <EntitySet Name="FaceDescriptor" EntityType="Self.FaceDescriptor" />
+          <EntitySet Name="Firm" EntityType="Self.Firm" />
+          <EntitySet Name="Kpp" EntityType="Self.Kpp" />
+          <EntitySet Name="MailService" EntityType="Self.MailService" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
+          <EntitySet Name="Struct" EntityType="Self.Struct" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" />
+          <EntitySet Name="Terminal" EntityType="Self.Terminal" />
+          <EntitySet Name="TerminalCondition" EntityType="Self.TerminalCondition" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="VerificationQueue" EntityType="Self.VerificationQueue" />
+          <EntitySet Name="VerificationResult" EntityType="Self.VerificationResult" />
+          <EntitySet Name="WorkCheck" EntityType="Self.WorkCheck" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" />
+          <AssociationSet Name="FK_VerificationQueue_Diagnosis" Association="Self.FK_VerificationQueue_Diagnosis">
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+            <End Role="VerificationQueue" EntitySet="VerificationQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Diagnosis" Association="Self.FK_VerificationResult_Diagnosis">
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK6almi6qttb9q9auqr2jhv3qdf" Association="Self.FK6almi6qttb9q9auqr2jhv3qdf">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FKc6m5ha4t5ixqpnie3est35bar" Association="Self.FKc6m5ha4t5ixqpnie3est35bar">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FKj4ymbukhld55yx54bs313i1ui" Association="Self.FKj4ymbukhld55yx54bs313i1ui">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="Diagnosis" EntitySet="Diagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FaceDescriptor_Users" Association="Self.FK_FaceDescriptor_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FaceDescriptor" EntitySet="FaceDescriptor" />
+          </AssociationSet>
+          <AssociationSet Name="FK3neppn7ik9jmpo1qc5bmny49a" Association="Self.FK3neppn7ik9jmpo1qc5bmny49a">
+            <End Role="Firm" EntitySet="Firm" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK9nnnakic6qnv00pptas22wfkf" Association="Self.FK9nnnakic6qnv00pptas22wfkf">
+            <End Role="Kpp" EntitySet="Kpp" />
+            <End Role="Terminal" EntitySet="Terminal" />
+          </AssociationSet>
+          <AssociationSet Name="FKpm4yny0j1g5deotits3etxi7w" Association="Self.FKpm4yny0j1g5deotits3etxi7w">
+            <End Role="Kpp" EntitySet="Kpp" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FKbaesp1t78vo6h8sugk2xmgp2x" Association="Self.FKbaesp1t78vo6h8sugk2xmgp2x">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK4bb3lbogcjyv2rgcymgowbk9i" Association="Self.FK4bb3lbogcjyv2rgcymgowbk9i">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Struct1" EntitySet="Struct" />
+          </AssociationSet>
+          <AssociationSet Name="FKje65tdo6ksjba53btju9ausen" Association="Self.FKje65tdo6ksjba53btju9ausen">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FKod6uv2bf5bla0oppl6ev0c9gr" Association="Self.FKod6uv2bf5bla0oppl6ev0c9gr">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="Struct_fk0" Association="Self.Struct_fk0">
+            <End Role="Struct" EntitySet="Struct" />
+            <End Role="Struct1" EntitySet="Struct" />
+          </AssociationSet>
+          <AssociationSet Name="FKkg6ca1ilhywv1kolxhbhxnmky" Association="Self.FKkg6ca1ilhywv1kolxhbhxnmky">
+            <End Role="Terminal" EntitySet="Terminal" />
+            <End Role="TerminalCondition" EntitySet="TerminalCondition" />
+          </AssociationSet>
+          <AssociationSet Name="FK6na3xe6ww7u254tyu6utyy4s9" Association="Self.FK6na3xe6ww7u254tyu6utyy4s9">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Users" Association="Self.FK_VerificationResult_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VerificationResult_Users1" Association="Self.FK_VerificationResult_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="VerificationResult" EntitySet="VerificationResult" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="localdb4ModelStoreContainer" CdmEntityContainer="localdb4Entities">
+          <EntitySetMapping Name="Constants">
+            <EntityTypeMapping TypeName="localdb4Model.Constants">
+              <MappingFragment StoreEntitySet="Constants">
+                <ScalarProperty Name="alcoWait" ColumnName="alcoWait" />
+                <ScalarProperty Name="alcoDoubleDiagnosis" ColumnName="alcoDoubleDiagnosis" />
+                <ScalarProperty Name="timeoutParamedicEdit" ColumnName="timeoutParamedicEdit" />
+                <ScalarProperty Name="notificationDelay" ColumnName="notificationDelay" />
+                <ScalarProperty Name="alcoWarning" ColumnName="alcoWarning" />
+                <ScalarProperty Name="alcoCritical" ColumnName="alcoCritical" />
+                <ScalarProperty Name="metal" ColumnName="metal" />
+                <ScalarProperty Name="guiConfig" ColumnName="guiConfig" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnosis">
+            <EntityTypeMapping TypeName="localdb4Model.Diagnosis">
+              <MappingFragment StoreEntitySet="Diagnosis">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="personID" ColumnName="personID" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="paramedicID" ColumnName="paramedicID" />
+                <ScalarProperty Name="alcoResult" ColumnName="alcoResult" />
+                <ScalarProperty Name="diagnosisDateTime" ColumnName="diagnosisDateTime" />
+                <ScalarProperty Name="startPhotoPath" ColumnName="startPhotoPath" />
+                <ScalarProperty Name="videoPath" ColumnName="videoPath" />
+                <ScalarProperty Name="paramedicVisit" ColumnName="paramedicVisit" />
+                <ScalarProperty Name="paramedicResult" ColumnName="paramedicResult" />
+                <ScalarProperty Name="diagnosisParamedic" ColumnName="diagnosisParamedic" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="verification" ColumnName="verification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FaceDescriptor">
+            <EntityTypeMapping TypeName="localdb4Model.FaceDescriptor">
+              <MappingFragment StoreEntitySet="FaceDescriptor">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="descriptor" ColumnName="descriptor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Firm">
+            <EntityTypeMapping TypeName="localdb4Model.Firm">
+              <MappingFragment StoreEntitySet="Firm">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kpp">
+            <EntityTypeMapping TypeName="localdb4Model.Kpp">
+              <MappingFragment StoreEntitySet="Kpp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="zone" ColumnName="zone" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailService">
+            <EntityTypeMapping TypeName="localdb4Model.MailService">
+              <MappingFragment StoreEntitySet="MailService">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="diagnosisId" ColumnName="diagnosisId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="localdb4Model.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="inStart" ColumnName="inStart" />
+                <ScalarProperty Name="inStop" ColumnName="inStop" />
+                <ScalarProperty Name="outStart" ColumnName="outStart" />
+                <ScalarProperty Name="outStop" ColumnName="outStop" />
+                <ScalarProperty Name="blockStart" ColumnName="blockStart" />
+                <ScalarProperty Name="blockStop" ColumnName="blockStop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Struct">
+            <EntityTypeMapping TypeName="localdb4Model.Struct">
+              <MappingFragment StoreEntitySet="Struct">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lvl" ColumnName="lvl" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="localdb4Model.Subscriptions">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="structID" ColumnName="structID" />
+                <ScalarProperty Name="userRoleID" ColumnName="userRoleID" />
+                <ScalarProperty Name="kppID" ColumnName="kppID" />
+                <ScalarProperty Name="firmID" ColumnName="firmID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="reportSub" ColumnName="reportSub" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terminal">
+            <EntityTypeMapping TypeName="localdb4Model.Terminal">
+              <MappingFragment StoreEntitySet="Terminal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kppID" ColumnName="kppID" />
+                <ScalarProperty Name="number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TerminalCondition">
+            <EntityTypeMapping TypeName="localdb4Model.TerminalCondition">
+              <MappingFragment StoreEntitySet="TerminalCondition">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="timeUpdated" ColumnName="timeUpdated" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="rfidReaderStatus" ColumnName="rfidReaderStatus" />
+                <ScalarProperty Name="alcoInStatus" ColumnName="alcoInStatus" />
+                <ScalarProperty Name="alcoOutStatus" ColumnName="alcoOutStatus" />
+                <ScalarProperty Name="metalStatus" ColumnName="metalStatus" />
+                <ScalarProperty Name="webcamInStatus" ColumnName="webcamInStatus" />
+                <ScalarProperty Name="webcamOutStatus" ColumnName="webcamOutStatus" />
+                <ScalarProperty Name="turnstileStatus" ColumnName="turnstileStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="localdb4Model.UserRoles">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="patrinymicName" ColumnName="patrinymicName" />
+                <ScalarProperty Name="login" ColumnName="login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="localdb4Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identificationCardCode" ColumnName="identificationCardCode" />
+                <ScalarProperty Name="personNumber" ColumnName="personNumber" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="patronymicName" ColumnName="patronymicName" />
+                <ScalarProperty Name="photoPath" ColumnName="photoPath" />
+                <ScalarProperty Name="jobPosition" ColumnName="jobPosition" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="passID" ColumnName="passID" />
+                <ScalarProperty Name="archived" ColumnName="archived" />
+                <ScalarProperty Name="placeControl" ColumnName="placeControl" />
+                <ScalarProperty Name="structCode" ColumnName="structCode" />
+                <ScalarProperty Name="firm" ColumnName="firm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerificationQueue">
+            <EntityTypeMapping TypeName="localdb4Model.VerificationQueue">
+              <MappingFragment StoreEntitySet="VerificationQueue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="diagnosisId" ColumnName="diagnosisId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerificationResult">
+            <EntityTypeMapping TypeName="localdb4Model.VerificationResult">
+              <MappingFragment StoreEntitySet="VerificationResult">
+                <ScalarProperty Name="criteria" ColumnName="criteria" />
+                <ScalarProperty Name="probability" ColumnName="probability" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="diagnosisId" ColumnName="diagnosisId" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+                <ScalarProperty Name="expectedId" ColumnName="expectedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkCheck">
+            <EntityTypeMapping TypeName="localdb4Model.WorkCheck">
+              <MappingFragment StoreEntitySet="WorkCheck">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateTimeIn" ColumnName="dateTimeIn" />
+                <ScalarProperty Name="dateTimeOut" ColumnName="dateTimeOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLog">
+            <EntityTypeMapping TypeName="localdb4Model.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="errorDate" ColumnName="errorDate" />
+                <ScalarProperty Name="currentDate" ColumnName="currentDate" />
+                <ScalarProperty Name="rfidReaderStatus" ColumnName="rfidReaderStatus" />
+                <ScalarProperty Name="alcoInStatus" ColumnName="alcoInStatus" />
+                <ScalarProperty Name="alcoOutStatus" ColumnName="alcoOutStatus" />
+                <ScalarProperty Name="webcamInStatus" ColumnName="webcamInStatus" />
+                <ScalarProperty Name="webcamOutStatus" ColumnName="webcamOutStatus" />
+                <ScalarProperty Name="turnstileStatus" ColumnName="turnstileStatus" />
+                <ScalarProperty Name="global_status" ColumnName="global_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

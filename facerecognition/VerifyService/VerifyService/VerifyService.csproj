@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1669208E-DB2A-41CD-A86F-DD299B42F69F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VerifyService</RootNamespace>
+    <AssemblyName>VerifyService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\DataBaseController.cs" />
+    <Compile Include="Core\AppController.cs" />
+    <Compile Include="Core\RecognitionController.cs" />
+    <Compile Include="DataBase\Constants.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Diagnosis.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\ErrorLog.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\FaceDescriptor.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Firm.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Kpp.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\localdb4.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>localdb4.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\localdb4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\localdb4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>localdb4.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\MailService.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Schedule.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Struct.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Subscriptions.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Terminal.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\TerminalCondition.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\UserRoles.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\Users.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\VerificationQueue.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\VerificationResult.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\WorkCheck.cs">
+      <DependentUpon>localdb4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\ResultCompare.cs" />
+    <Compile Include="Enums\VerifyResult.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\FaceRecDLib.cs" />
+    <Compile Include="Proxies\facerecognition.cs" />
+    <Compile Include="Proxies\facerecognitionPINVOKE.cs" />
+    <Compile Include="Proxies\ListString.cs" />
+    <Compile Include="Proxies\ResultVerify.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="DataBase\localdb4.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>localdb4.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataBase\localdb4.edmx.diagram">
+      <DependentUpon>localdb4.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataBase\localdb4.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>localdb4.edmx</DependentUpon>
+      <LastGenOutput>localdb4.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataBase\localdb4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>localdb4.edmx</DependentUpon>
+      <LastGenOutput>localdb4.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /r /y "$(SolutionDir)\..\..\..\Packages\OpenCV310\win64\vc14\bin\opencv_ffmpeg310_64.dll" "$(TargetDir)"
+
+xcopy /r /y "$(SolutionDir)\..\..\..\Packages\OpenCV310\win64\vc14\bin\opencv_world310.dll" "$(TargetDir)"
+xcopy /r /y "$(SolutionDir)\..\..\..\Packages\OpenCV310\win64\vc14\bin\opencv_world310d.dll" "$(TargetDir)"
+
+
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

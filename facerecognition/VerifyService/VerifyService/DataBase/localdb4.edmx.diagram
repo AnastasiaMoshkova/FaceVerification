@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71df8e866cb54961a42f56878d8615e2" Name="Diagram1">
+        <EntityTypeShape EntityType="localdb4Model.Constants" Width="1.5" PointX="10.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Diagnosis" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.FaceDescriptor" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Firm" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Kpp" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.MailService" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Schedule" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Struct" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Subscriptions" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Terminal" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.TerminalCondition" Width="1.5" PointX="7.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.UserRoles" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.Users" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.VerificationQueue" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.VerificationResult" Width="1.5" PointX="9.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.WorkCheck" Width="1.5" PointX="11.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="localdb4Model.ErrorLog" Width="1.5" PointX="9.75" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="localdb4Model.FK_VerificationQueue_Diagnosis" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK_VerificationResult_Diagnosis" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK6almi6qttb9q9auqr2jhv3qdf" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKc6m5ha4t5ixqpnie3est35bar" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKj4ymbukhld55yx54bs313i1ui" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK_FaceDescriptor_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK3neppn7ik9jmpo1qc5bmny49a" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK9nnnakic6qnv00pptas22wfkf" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKpm4yny0j1g5deotits3etxi7w" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKbaesp1t78vo6h8sugk2xmgp2x" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK4bb3lbogcjyv2rgcymgowbk9i" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKje65tdo6ksjba53btju9ausen" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKod6uv2bf5bla0oppl6ev0c9gr" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.Struct_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FKkg6ca1ilhywv1kolxhbhxnmky" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK6na3xe6ww7u254tyu6utyy4s9" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK_VerificationResult_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="localdb4Model.FK_VerificationResult_Users1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
